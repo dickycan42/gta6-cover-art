@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunset Heist Cover Studio — GTA-style poster cover maker</title>
+<meta name="description" content="Turn your photos and a caption into a multi-panel poster-style cover, graded like a neon sunset, and export it as a PNG. Runs fully offline in your browser.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">SH</span>
+    <div>
+      <h1>Sunset Heist Cover Studio</h1>
+      <p>Your photos, turned into a poster-style cover. Nothing leaves your machine.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="undoButton" type="button" class="ghost-button" disabled>Undo</button>
+    <button id="redoButton" type="button" class="ghost-button" disabled>Redo</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <section class="preview-column" aria-label="Cover preview">
+    <div class="canvas-frame">
+      <canvas id="coverCanvas" width="1080" height="1080"></canvas>
+    </div>
+    <p id="statusLine" class="status-line" role="status">Loading the studio…</p>
+    <p class="hint-line">Click a panel to select it, drag to move its photo, scroll to zoom it.</p>
+  </section>
+
+  <aside class="controls" aria-label="Cover controls">
+    <section class="control-group">
+      <h2>1 · Photos</h2>
+      <label class="upload-button" for="photoInput">Add your photos…</label>
+      <input id="photoInput" type="file" accept="image/*" multiple hidden>
+      <div class="sample-row">
+        <span>Or try a sample:</span>
+        <button type="button" data-sample="boulevard" class="text-button">Boulevard</button>
+        <button type="button" data-sample="pier" class="text-button">Pier</button>
+      </div>
+      <div id="photoStrip" class="photo-strip" aria-label="Loaded photos"></div>
+      <button id="fillAllButton" type="button" class="ghost-button" disabled>Fill every panel with the selected photo</button>
+    </section>
+
+    <section class="control-group">
+      <h2>2 · Layout</h2>
+      <div id="layoutButtons" class="button-grid"></div>
+    </section>
+
+    <section class="control-group">
+      <h2>3 · Colour grade</h2>
+      <div id="gradeButtons" class="button-grid"></div>
+    </section>
+
+    <section class="control-group">
+      <h2>4 · Words</h2>
+      <label class="field-label" for="captionInput">Caption</label>
+      <input id="captionInput" type="text" value="SUNSET HEIST" maxlength="40" autocomplete="off">
+      <label class="field-label" for="subtitleInput">Script subtitle</label>
+      <input id="subtitleInput" type="text" value="neon coast nights" maxlength="48" autocomplete="off">
+      <label class="field-label" for="badgeInput">Ribbon text</label>
+      <input id="badgeInput" type="text" value="NEON COAST" maxlength="18" autocomplete="off">
+      <label class="field-label" for="starsInput">Star meter</label>
+      <input id="starsInput" type="range" min="0" max="5" step="1" value="5">
+    </section>
+
+    <section class="control-group">
+      <h2>5 · Export as PNG</h2>
+      <label class="field-label" for="sizeSelect">Preview size</label>
+      <select id="sizeSelect"></select>
+      <div class="export-row">
+        <button type="button" data-export="1080x1080" class="export-button">Square 1080 × 1080</button>
+        <button type="button" data-export="1080x1350" class="export-button">Portrait 1080 × 1350</button>
+        <button type="button" data-export="1920x1080" class="export-button">Wide 1920 × 1080</button>
+      </div>
+    </section>
+
+    <p class="fine-print">Offline by design: your photos are read on this machine and never uploaded. Fonts are Anton and Pacifico, shipped under the SIL Open Font License. An original design — no game artwork, logos, or fonts.</p>
+  </aside>
+</main>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

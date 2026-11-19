@@ -1,0 +1,245 @@
+/* Sunset Heist Cover Studio — editor chrome.
+   SPDX-License-Identifier: MIT */
+
+@font-face {
+  font-family: 'Anton';
+  src: url('fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pacifico';
+  src: url('fonts/Pacifico-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --night: #14091f;
+  --panel: #1e1030;
+  --panel-soft: #2a1844;
+  --ink: #f5efff;
+  --muted: #b9a8d8;
+  --pink: #ff2e88;
+  --orange: #ff9a3c;
+  --teal: #00e5c7;
+  --line: #3a2560;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: radial-gradient(1100px 600px at 85% -10%, #4b1d6e 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, #0e3a4a 0%, transparent 55%),
+    var(--night);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { display: flex; align-items: center; gap: 14px; }
+
+.brand-mark {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-family: 'Anton', 'Arial Black', sans-serif;
+  font-size: 24px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--orange), var(--pink) 55%, #7b2eff);
+  box-shadow: 0 0 24px rgba(255, 46, 136, 0.45);
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: 'Anton', 'Arial Black', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ffd166, var(--pink), #c86bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+
+.top-actions { display: flex; gap: 10px; }
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  padding: 24px 28px 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.preview-column { min-width: 0; }
+
+.canvas-frame {
+  background: #0a0614;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: grid;
+  place-items: center;
+}
+
+#coverCanvas {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+  cursor: grab;
+  touch-action: none;
+}
+
+#coverCanvas:active { cursor: grabbing; }
+
+.status-line { color: var(--muted); font-size: 13px; margin: 12px 2px 0; }
+.hint-line { color: var(--muted); font-size: 12px; margin: 4px 2px 0; opacity: 0.8; }
+
+.controls { display: flex; flex-direction: column; gap: 16px; }
+
+.control-group {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.control-group h2 {
+  margin: 0 0 12px;
+  font-family: 'Anton', 'Arial Black', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffd166;
+}
+
+.button-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.choice-button,
+.ghost-button,
+.text-button,
+.export-button,
+.upload-button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--panel-soft);
+  color: var(--ink);
+  padding: 9px 12px;
+}
+
+.choice-button:hover,
+.ghost-button:hover,
+.text-button:hover { border-color: var(--pink); }
+
+.choice-button.active {
+  background: linear-gradient(135deg, var(--orange), var(--pink));
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+
+.choice-button:disabled,
+.ghost-button:disabled { opacity: 0.45; cursor: default; }
+
+.upload-button {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--orange), var(--pink));
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+
+.sample-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 13px; color: var(--muted); }
+.text-button { padding: 6px 10px; font-size: 13px; }
+
+.photo-strip { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.photo-strip:empty { margin: 0; }
+
+.photo-chip {
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #120a20;
+  color: var(--ink);
+  padding: 6px 11px;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.photo-chip.active { border-color: var(--teal); color: var(--teal); }
+
+.field-label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+.field-label:first-of-type { margin-top: 0; }
+
+.controls input[type='text'],
+.controls select {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: #120a20;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 11px;
+}
+
+.controls input[type='text']:focus,
+.controls select:focus { outline: 2px solid var(--pink); outline-offset: 1px; }
+
+.controls input[type='range'] { width: 100%; accent-color: var(--pink); }
+
+.export-row { display: grid; gap: 8px; margin-top: 12px; }
+
+.export-button {
+  text-align: left;
+  font-weight: 700;
+  background: linear-gradient(135deg, #7b2eff, var(--pink));
+  border-color: transparent;
+  color: #fff;
+}
+
+.fine-print { font-size: 12px; line-height: 1.55; color: var(--muted); margin: 0; }
+
+/* Screenshot scenes: the cover fills the whole frame, chrome hidden. */
+body.shot-cover { background: #fff; }
+body.shot-cover .topbar,
+body.shot-cover .controls,
+body.shot-cover .status-line,
+body.shot-cover .hint-line { display: none; }
+body.shot-cover .workspace { display: block; padding: 0; margin: 0; max-width: none; }
+body.shot-cover .canvas-frame { padding: 0; border: 0; border-radius: 0; background: #fff; }
+body.shot-cover #coverCanvas { max-height: none; border-radius: 0; box-shadow: none; width: 100vw; height: 100vh; object-fit: contain; }
+
+@media (max-width: 900px) {
+  .workspace { grid-template-columns: 1fr; }
+  .topbar { flex-wrap: wrap; }
+}
